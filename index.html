@@ -4,72 +4,194 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professional GHS Binder System - Summit Maintenance Inc</title>
+    <meta name="description" content="Complete professional chemical safety binder system for Summit Maintenance Inc with interactive database and training materials.">
+    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+    
     <style>
         :root {
             --primary-color: #2c3e50;
+            --accent-color: #3498db;
             --binder-color: #8e44ad;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
             --gold-color: #f1c40f;
             --white: #ffffff;
+            --light-gray: #ecf0f1;
+            --dark-gray: #7f8c8d;
             --shadow: 0 4px 15px rgba(0,0,0,0.1);
             --binder-gradient: linear-gradient(135deg, #8e44ad, #3498db);
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             color: #333;
             line-height: 1.6;
+            overflow-x: hidden;
         }
+
         .header {
             background: var(--binder-gradient);
             color: var(--white);
             padding: 30px 20px;
             text-align: center;
             box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
         }
-        .header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
-        .customer-name { font-size: 1.8rem; margin-bottom: 10px; font-weight: 600; }
-        .subtitle { font-size: 1.2rem; opacity: 0.9; }
-        .banner {
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="80" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .customer-name {
+            font-size: clamp(1.4rem, 3.5vw, 2rem);
+            margin-bottom: 10px;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header .subtitle {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .professional-banner {
             background: var(--gold-color);
             color: var(--primary-color);
             padding: 15px;
             text-align: center;
             font-weight: 700;
             font-size: 1.1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+            animation: pulse 2s infinite;
         }
-        .showcase {
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.9; }
+        }
+
+        .binder-showcase {
             background: var(--white);
             margin: 30px 20px;
             border-radius: 15px;
             box-shadow: var(--shadow);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
+
+        .binder-showcase:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
         .showcase-header {
             background: var(--binder-gradient);
             color: var(--white);
             padding: 25px;
             text-align: center;
         }
-        .showcase-header h2 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
-        .binder-grid {
+
+        .showcase-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .showcase-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 25px;
             padding: 30px;
         }
+
         .binder-card {
             background: linear-gradient(145deg, #f8f9fa, #e9ecef);
             border-radius: 12px;
             padding: 25px;
             text-align: center;
             box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .binder-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--binder-gradient);
+        }
+
+        .binder-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            border-color: var(--binder-color);
+        }
+
+        .binder-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: block;
             transition: transform 0.3s ease;
         }
-        .binder-card:hover { transform: translateY(-8px); }
-        .binder-icon { font-size: 3rem; margin-bottom: 15px; }
-        .binder-title { font-size: 1.4rem; font-weight: 700; color: var(--primary-color); margin-bottom: 10px; }
-        .binder-description { color: #7f8c8d; margin-bottom: 20px; }
+
+        .binder-card:hover .binder-icon {
+            transform: scale(1.1);
+        }
+
+        .binder-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .binder-description {
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .binder-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
         .btn {
             background: var(--binder-color);
             color: var(--white);
@@ -83,38 +205,306 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 0.9rem;
         }
-        .btn:hover { background: #7d3c98; transform: translateY(-2px); }
-        .btn-gold { background: var(--gold-color); color: var(--primary-color); }
-        .btn-gold:hover { background: #e6c200; }
-        .stats {
+
+        .btn:hover {
+            background: #7d3c98;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .btn-gold {
+            background: var(--gold-color);
+            color: var(--primary-color);
+        }
+
+        .btn-gold:hover {
+            background: #e6c200;
+        }
+
+        .stats-dashboard {
             background: var(--white);
             margin: 20px;
             border-radius: 15px;
             box-shadow: var(--shadow);
             overflow: hidden;
+            transition: all 0.3s ease;
         }
-        .stats-header {
+
+        .stats-dashboard:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .dashboard-header {
             background: var(--primary-color);
             color: var(--white);
             padding: 20px;
             text-align: center;
         }
+
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
             padding: 25px;
         }
+
         .stat-card {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
             padding: 25px;
             border-radius: 12px;
             text-align: center;
             box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
             border-left: 4px solid var(--binder-color);
+            cursor: pointer;
         }
-        .stat-number { font-size: 2.5rem; font-weight: 800; color: var(--binder-color); margin-bottom: 8px; }
-        .stat-label { font-size: 1rem; color: var(--primary-color); font-weight: 600; }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-left-color: var(--gold-color);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--binder-color);
+            margin-bottom: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .stat-card:hover .stat-number {
+            color: var(--gold-color);
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .stat-sublabel {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            font-style: italic;
+        }
+
+        .container {
+            display: flex;
+            margin: 20px;
+            gap: 25px;
+            min-height: 600px;
+        }
+
+        .sidebar {
+            width: 350px;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            height: fit-content;
+            position: sticky;
+            top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: var(--binder-color);
+            box-shadow: 0 0 0 3px rgba(142, 68, 173, 0.1);
+            background: var(--white);
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 16px;
+            border: 2px solid #e0e0e0;
+            background: var(--white);
+            border-radius: 25px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active {
+            background: var(--binder-color);
+            color: var(--white);
+            border-color: var(--binder-color);
+            transform: scale(1.05);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--binder-color);
+            background: rgba(142, 68, 173, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .product-list {
+            max-height: 500px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--binder-color) transparent;
+        }
+
+        .product-list::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .product-list::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .product-list::-webkit-scrollbar-thumb {
+            background: var(--binder-color);
+            border-radius: 3px;
+        }
+
+        .product-item {
+            padding: 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+            background: #f8f9fa;
+        }
+
+        .product-item:hover {
+            background: #e9ecef;
+            border-left-color: var(--binder-color);
+            transform: translateX(5px);
+        }
+
+        .product-item.active {
+            background: var(--binder-color);
+            color: var(--white);
+            border-left-color: var(--gold-color);
+            transform: translateX(8px);
+        }
+
+        .product-item.professional_binder {
+            background: linear-gradient(135deg, #8e44ad, #3498db);
+            color: var(--white);
+            border-left-color: var(--gold-color);
+        }
+
+        .product-item.professional_binder:hover {
+            transform: translateX(8px) translateY(-2px);
+            box-shadow: 0 6px 20px rgba(142, 68, 173, 0.3);
+        }
+
+        .product-name {
+            font-weight: 700;
+            margin-bottom: 8px;
+            font-size: 1.05rem;
+        }
+
+        .product-status {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .main-content {
+            flex: 1;
+            background: var(--white);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .main-content:hover {
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .document-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #eee;
+        }
+
+        .document-title {
+            font-size: 2rem;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .welcome-message {
+            text-align: center;
+            padding: 50px 30px;
+        }
+
+        .welcome-message h2 {
+            color: var(--primary-color);
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+        }
+
+        .welcome-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+        }
+
         .footer {
             background: var(--primary-color);
             color: var(--white);
@@ -122,11 +512,109 @@
             text-align: center;
             margin-top: 50px;
         }
-        .footer h3 { margin-bottom: 20px; }
+
+        .footer h3 {
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+        }
+
         .provider-credit {
             margin-top: 30px;
             padding-top: 30px;
             border-top: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                flex-direction: column;
+                margin: 15px;
+            }
+            
+            .sidebar {
+                width: 100%;
+                position: static;
+            }
+            
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .showcase-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .binder-card {
+                padding: 20px;
+            }
+            
+            .main-content {
+                padding: 20px;
+            }
+            
+            .welcome-features {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-filters {
+                justify-content: center;
+            }
+            
+            .filter-btn {
+                font-size: 0.8rem;
+                padding: 8px 14px;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Success/Error Messages */
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-weight: 500;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
         }
     </style>
 </head>
@@ -136,88 +624,843 @@
         <div class="customer-name">Summit Maintenance Inc</div>
         <div class="subtitle">Complete Safety Documentation & Training Platform</div>
         <div style="font-size: 0.9rem; margin-top: 15px; opacity: 0.9;">
-            Professional Binder System v8.35-GIT-DATA-API | Generated: 8/4/2025
+            Professional Binder System v8.35-COMPLETE-RESTORE-FIXED | Generated: 8/4/2025
         </div>
     </header>
 
-    <div class="banner">
-        🏆 PROFESSIONAL BINDER COLLECTION - Premium Safety Documentation System
+    <div class="professional-banner">
+        🏆 COMPLETE PROFESSIONAL BINDER COLLECTION - Premium Safety Documentation System
     </div>
 
-    <div class="showcase">
+    <div class="binder-showcase">
         <div class="showcase-header">
             <h2>Professional Safety Binders</h2>
-            <p>Complete collection of professional-grade safety documentation</p>
+            <p>Complete collection of professional-grade safety documentation with full interactive access</p>
         </div>
-        <div class="binder-grid">
-            <div class="binder-card">
-                <div class="binder-icon">📋</div>
+        <div class="showcase-grid">
+            <div class="binder-card" onclick="openProfessionalBinder('sds')">
+                <span class="binder-icon">📋</span>
                 <div class="binder-title">Combined SDS Binder</div>
                 <div class="binder-description">
                     Professional compilation of all Safety Data Sheets in one comprehensive document. 
-                    Includes 13 safety data sheets with professional formatting.
+                    Includes 13 safety data sheets with professional formatting and emergency access.
                 </div>
-                <a href="pdfs/Combined_SDS_Binder.pdf" target="_blank" class="btn btn-gold">
-                    🖨️ Open Binder
-                </a>
+                <div class="binder-actions">
+                    <button onclick="event.stopPropagation(); openProfessionalBinder('sds')" class="btn btn-gold">
+                        🖨️ Open Binder
+                    </button>
+                </div>
             </div>
             
-            <div class="binder-card">
-                <div class="binder-icon">🎓</div>
+            <div class="binder-card" onclick="openProfessionalBinder('training')">
+                <span class="binder-icon">🎓</span>
                 <div class="binder-title">GHS Training Binder</div>
                 <div class="binder-description">
                     Complete training system with 8 professional sections covering GHS requirements, 
-                    hazard classification, and company-specific procedures.
+                    hazard classification, and Summit Maintenance Inc-specific procedures and compliance.
                 </div>
-                <a href="pdfs/GHS_Training_Binder.pdf" target="_blank" class="btn btn-gold">
-                    📚 Open Training
-                </a>
+                <div class="binder-actions">
+                    <button onclick="event.stopPropagation(); openProfessionalBinder('training')" class="btn btn-gold">
+                        📚 Open Training
+                    </button>
+                </div>
             </div>
             
-            <div class="binder-card">
-                <div class="binder-icon">🔍</div>
+            <div class="binder-card" onclick="focusSearch()">
+                <span class="binder-icon">🔍</span>
                 <div class="binder-title">Chemical Database</div>
                 <div class="binder-description">
                     Interactive searchable database of all 15 chemicals with instant 
-                    access to safety data sheets and product literature.
+                    access to safety data sheets, product literature, and emergency information.
                 </div>
-                <button class="btn">🔍 Search Database</button>
+                <div class="binder-actions">
+                    <button onclick="event.stopPropagation(); focusSearch()" class="btn">
+                        🔍 Search Database
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="stats">
-        <div class="stats-header">
-            <h3>📊 Safety Documentation Overview</h3>
+    <div class="stats-dashboard">
+        <div class="dashboard-header">
+            <h3>📊 Complete Safety Documentation Overview</h3>
         </div>
         <div class="stats-grid">
-            <div class="stat-card">
+            <div class="stat-card" onclick="showStatDetails('binders')">
                 <div class="stat-number">3</div>
                 <div class="stat-label">Professional Binders</div>
+                <div class="stat-sublabel">Complete Collection</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="showStatDetails('sds')">
                 <div class="stat-number">13</div>
                 <div class="stat-label">Safety Data Sheets</div>
+                <div class="stat-sublabel">OSHA Compliant</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="showStatDetails('literature')">
                 <div class="stat-number">14</div>
                 <div class="stat-label">Product Literature</div>
+                <div class="stat-sublabel">Technical Documents</div>
             </div>
-            <div class="stat-card">
+            <div class="stat-card" onclick="showStatDetails('compliance')">
                 <div class="stat-number">100%</div>
                 <div class="stat-label">GHS Compliance</div>
+                <div class="stat-sublabel">Fully Compliant</div>
             </div>
         </div>
+    </div>
+
+    <div class="container">
+        <aside class="sidebar">
+            <input type="text" class="search-box" placeholder="🔍 Search chemicals and binders..." id="searchBox">
+            
+            <div class="category-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="professional_binder">Pro Binders</button>
+                <button class="filter-btn" data-filter="pair">Chemicals</button>
+                <button class="filter-btn" data-filter="customer_binder">Customer Files</button>
+            </div>
+
+            <h3 style="margin-bottom: 20px; color: var(--primary-color); font-weight: 700;">📚 Complete Collection</h3>
+            <div class="product-list" id="productList">
+                <!-- Products will be populated by JavaScript -->
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <div class="document-header">
+                <h2 class="document-title" id="documentTitle">Professional GHS Binder System</h2>
+            </div>
+            
+            <div class="content-area" id="contentArea">
+                <div class="welcome-message">
+                    <h2>Welcome to Your Complete Professional Safety Platform</h2>
+                    <p style="font-size: 1.1rem; margin-bottom: 30px;">
+                        Complete GHS-compliant safety documentation system with professional binders, interactive database, and comprehensive training materials.
+                    </p>
+                    
+                    <div class="welcome-features">
+                        <div class="feature-card" onclick="openProfessionalBinder('sds')">
+                            <span class="feature-icon">📋</span>
+                            <h4>Combined SDS Binder</h4>
+                            <p>All safety data sheets in one professional document with emergency access</p>
+                        </div>
+                        <div class="feature-card" onclick="openProfessionalBinder('training')">
+                            <span class="feature-icon">🎓</span>
+                            <h4>Training System</h4>
+                            <p>Complete GHS training curriculum with 8 comprehensive sections</p>
+                        </div>
+                        <div class="feature-card" onclick="focusSearch()">
+                            <span class="feature-icon">🔍</span>
+                            <h4>Search & Access</h4>
+                            <p>Instant access to any chemical documentation with real-time filtering</p>
+                        </div>
+                        <div class="feature-card" onclick="showEmergencyInfo()">
+                            <span class="feature-icon">🚨</span>
+                            <h4>Emergency Ready</h4>
+                            <p>24/7 access for emergency response personnel with quick reference</p>
+                        </div>
+                    </div>
+                    
+                    <p style="font-size: 1rem; color: var(--dark-gray); margin-top: 30px;">
+                        <strong>Complete System Features:</strong> 3 Professional Binders • 
+                        13 Safety Data Sheets • 14 Technical Documents • 
+                        100% GHS Compliant • Real-time Search • Mobile Responsive
+                    </p>
+                    
+                    <div class="message success" style="margin-top: 30px;">
+                        <strong>System Status:</strong> All features active and fully functional. Complete interactive access available.
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
 
     <footer class="footer">
-        <h3>🏆 Professional GHS Binder System</h3>
-        <p>Complete safety documentation solution maintaining OSHA compliance</p>
+        <h3>🏆 Complete Professional GHS Binder System</h3>
+        <p>Comprehensive safety documentation solution maintaining OSHA Hazard Communication Standard compliance (29 CFR 1910.1200)</p>
         
         <div class="provider-credit">
             <p><strong>Professional System by RascoWeb, Inc.</strong></p>
-            <p>Generated: 8/4/2025 | System v8.35-GIT-DATA-API</p>
+            <p>Generated: 8/4/2025 | System v8.35-COMPLETE-RESTORE-FIXED</p>
+            <p style="font-size: 0.9rem; margin-top: 15px; opacity: 0.8;">
+                Complete professional binder system designed for Summit Maintenance Inc with full chemical safety documentation and interactive features
+            </p>
         </div>
     </footer>
+
+    <script>
+        // COMPLETE INTERACTIVE FUNCTIONALITY - FULLY RESTORED + FIXED
+        const products = [
+  {
+    "name": "Combined SDS Binder",
+    "id": "binder_0",
+    "description": "Professional sds binder for Summit Maintenance Inc",
+    "hazards": "Professional safety documentation system",
+    "sds": null,
+    "literature": "pdfs/Combined_SDS_Binder.pdf",
+    "pairType": "BINDER",
+    "category": "professional_binder",
+    "isProfessionalBinder": true,
+    "binderType": "sds"
+  },
+  {
+    "name": "GHS Training Binder",
+    "id": "binder_1",
+    "description": "Professional training binder for Summit Maintenance Inc",
+    "hazards": "Professional safety documentation system",
+    "sds": null,
+    "literature": null,
+    "pairType": "BINDER",
+    "category": "professional_binder",
+    "isProfessionalBinder": true,
+    "binderType": "training"
+  },
+  {
+    "name": "302 D T Bowl Cleaner",
+    "id": 1,
+    "description": "Professional 302 d t bowl cleaner chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/302 D T Bowl Cleaner SDS_3DGBLP.pdf",
+    "literature": "pdfs/302 D T Bowl Cleaner Literature_3DGBLP.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "319 E N A Disinfectant",
+    "id": 2,
+    "description": "Professional 319 e n a disinfectant chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/319 E N A Disinfectant SDS_3EGRCB.pdf",
+    "literature": "pdfs/319 E N A Disinfectant Literature_3EGRCB.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "20250424 TRIPLE S2",
+    "id": 3,
+    "description": "Professional 20250424 triple s2 chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": null,
+    "literature": "pdfs/20250424 TRIPLE S2 Literature_2TF278.pdf",
+    "pairType": "SINGLETON",
+    "category": "singleton"
+  },
+  {
+    "name": "Bella Hand Soap",
+    "id": 4,
+    "description": "Professional bella hand soap chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Bella Hand Soap SDS_BHBYGN.pdf",
+    "literature": "pdfs/Bella Hand Soap Literature_BHBYGN.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "Blue Concentrate",
+    "id": 5,
+    "description": "Professional blue concentrate chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Blue Concentrate SDS_BCIMFJ.pdf",
+    "literature": "pdfs/Blue Concentrate Literature_BCIMFJ.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "Envirox 112 Hyper Concentrate",
+    "id": 6,
+    "description": "Professional envirox 112 hyper concentrate chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Envirox 112 Hyper Concentrate SDS_E1NDDN.pdf",
+    "literature": "pdfs/Envirox 112 Hyper Concentrate Literature_E1NDDN.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "Graffiti Safewipes",
+    "id": 7,
+    "description": "Professional graffiti safewipes chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Graffiti Safewipes SDS_GSNT7B.pdf",
+    "literature": "pdfs/Graffiti Safewipes Literature_GSNT7B.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "SSS Clarity Glass Concentrate",
+    "id": 8,
+    "description": "Professional sss clarity glass concentrate chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/SSS Clarity Glass Concentrate SDS_SC3EMI.pdf",
+    "literature": "pdfs/SSS Clarity Glass Concentrate Literature_SC3EMI.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "SSS Foamclean Lotion Skin Cleanser eratrue",
+    "id": 9,
+    "description": "Professional sss foamclean lotion skin cleanser eratrue chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/SSS Foamclean Lotion Skin Cleanser eratrue SDS_SF9SFL.pdf",
+    "literature": "pdfs/SSS Foamclean Lotion Skin Cleanser eratrue Literature_SF9SFL.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "SSS Maverick Degreaser",
+    "id": 10,
+    "description": "Professional sss maverick degreaser chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/SSS Maverick Degreaser SDS_SM90E6.pdf",
+    "literature": "pdfs/SSS Maverick Degreaser Literature_SM90E6.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "SSS S S Cleaner and Polish Oil erture",
+    "id": 11,
+    "description": "Professional sss s s cleaner and polish oil erture chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/SSS S S Cleaner and Polish Oil erture SDS_SS82XZ.pdf",
+    "literature": "pdfs/SSS S S Cleaner and Polish Oil erture Literature_SS82XZ.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "Storm",
+    "id": 12,
+    "description": "Professional storm chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Storm SDS_SW13Z.pdf",
+    "literature": "pdfs/Storm Literature_SW13Z.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "Summit Maintenance GHS Binder TEST Version",
+    "id": 13,
+    "description": "Professional summit maintenance ghs binder test version chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": null,
+    "literature": "pdfs/Summit Maintenance GHS Binder TEST Version Literature_SMSHKV.pdf",
+    "pairType": "SINGLETON",
+    "category": "customer_binder"
+  },
+  {
+    "name": "Taginator",
+    "id": 14,
+    "description": "Professional taginator chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Taginator SDS_TF2X9.pdf",
+    "literature": "pdfs/Taginator Literature_TF2X9.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  },
+  {
+    "name": "Tree Z Graffiti Remover",
+    "id": 15,
+    "description": "Professional tree z graffiti remover chemical documentation",
+    "hazards": "See Safety Data Sheet for complete hazard information",
+    "sds": "pdfs/Tree Z Graffiti Remover SDS_TZB49F.pdf",
+    "literature": "pdfs/Tree Z Graffiti Remover Literature_TZB49F.pdf",
+    "pairType": "COMPLETE",
+    "category": "pair"
+  }
+];
+        let currentProduct = null;
+        let filteredProducts = [...products];
+        let activeFilter = 'all';
+
+        /**
+         * Opens professional binder PDFs in new window/tab with enhanced error handling
+         */
+        function openProfessionalBinder(type) {
+            const filename = type === 'sds' ? 'Combined_SDS_Binder.pdf' : 'GHS_Training_Binder.pdf';
+            const url = `pdfs/${filename}`;
+            
+            console.log(`Opening professional ${type} binder: ${url}`);
+            
+            try {
+                const printWindow = window.open(url, `professional_binder_${type}`, 'width=1200,height=800,scrollbars=yes,resizable=yes');
+                
+                if (printWindow) {
+                    console.log(`✅ Professional ${type} binder opened successfully`);
+                    
+                    // Focus the new window after a brief delay
+                    setTimeout(() => {
+                        try {
+                            printWindow.focus();
+                        } catch (e) {
+                            console.log('Auto-focus not available in this browser');
+                        }
+                    }, 1000);
+                    
+                    // Show success message
+                    showMessage(`Professional ${type === 'sds' ? 'SDS' : 'Training'} Binder opened successfully!`, 'success');
+                } else {
+                    throw new Error('Window blocked');
+                }
+            } catch (error) {
+                console.error(`❌ Failed to open professional ${type} binder:`, error);
+                showMessage('Unable to open professional binder. Please check if pop-up blockers are disabled and try again.', 'error');
+            }
+        }
+
+        /**
+         * Focuses and selects search box content with enhanced UX
+         */
+        function focusSearch() {
+            const searchBox = document.getElementById('searchBox');
+            searchBox.focus();
+            searchBox.select();
+            
+            // Scroll sidebar into view on mobile
+            if (window.innerWidth <= 768) {
+                searchBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            showMessage('Search activated - start typing to filter chemicals and binders', 'success');
+        }
+
+        /**
+         * Shows emergency information in main content area
+         */
+        function showEmergencyInfo() {
+            updateMainContent({
+                name: 'Emergency Response Information',
+                isProfessionalBinder: false,
+                isEmergency: true
+            });
+        }
+
+        /**
+         * FIX #1: Shows statistics details based on type - FIXED template literals
+         */
+        function showStatDetails(type) {
+            const statsInfo = {
+                'binders': {
+                    title: 'Professional Binders Overview',
+                    details: 'Complete collection of professional-grade safety binders including Combined SDS and GHS Training materials.'
+                },
+                'sds': {
+                    title: 'Safety Data Sheets Collection',
+                    details: `13 complete Safety Data Sheets providing comprehensive hazard information for all chemicals.`
+                },
+                'literature': {
+                    title: 'Technical Literature Collection',
+                    details: `14 technical documents providing detailed product specifications and usage information.`
+                },
+                'compliance': {
+                    title: 'GHS Compliance Status',
+                    details: 'Full compliance with OSHA Hazard Communication Standard (29 CFR 1910.1200) and GHS requirements.'
+                }
+            };
+            
+            const info = statsInfo[type];
+            if (info) {
+                updateMainContent({
+                    name: info.title,
+                    description: info.details,
+                    isStatDetail: true
+                });
+            }
+        }
+
+        /**
+         * Shows temporary messages to user
+         */
+        function showMessage(text, type = 'success') {
+            const existingMessage = document.querySelector('.temp-message');
+            if (existingMessage) {
+                existingMessage.remove();
+            }
+            
+            const message = document.createElement('div');
+            message.className = `message ${type} temp-message`;
+            message.textContent = text;
+            message.style.position = 'fixed';
+            message.style.top = '20px';
+            message.style.right = '20px';
+            message.style.zIndex = '1000';
+            message.style.minWidth = '300px';
+            message.style.maxWidth = '400px';
+            
+            document.body.appendChild(message);
+            
+            setTimeout(() => {
+                message.style.opacity = '0';
+                setTimeout(() => message.remove(), 300);
+            }, 3000);
+        }
+
+        /**
+         * Debounce utility function to optimize performance
+         */
+        function debounce(fn, delay) {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn.apply(this, args), delay);
+            };
+        }
+
+        /**
+         * Main initialization function - sets up all interactive features
+         */
+        function initializeApp() {
+            console.log('🚀 Initializing Professional GHS Binder System v8.35-COMPLETE-RESTORE-FIXED...');
+            
+            populateProductList();
+            setupSearchBox();
+            setupCategoryFilters();
+            setupKeyboardShortcuts();
+            
+            console.log(`✅ System initialized successfully with ${products.length} items`);
+            console.log(`📊 System includes: ${products.filter(p => p.isProfessionalBinder).length} professional binders, ${products.filter(p => !p.isProfessionalBinder).length} chemicals`);
+            console.log('🔧 Features: Git Data API deployment + Complete interactive functionality + All 5 fixes applied');
+            
+            // Show welcome message
+            setTimeout(() => {
+                showMessage('Professional GHS Binder System fully loaded and ready!', 'success');
+            }, 1000);
+        }
+
+        /**
+         * Sets up keyboard shortcuts for enhanced UX
+         */
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // Ctrl/Cmd + F to focus search
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    focusSearch();
+                }
+                
+                // Escape to clear search
+                if (e.key === 'Escape') {
+                    const searchBox = document.getElementById('searchBox');
+                    if (searchBox.value) {
+                        searchBox.value = '';
+                        filterProducts();
+                    }
+                }
+            });
+        }
+
+        /**
+         * Sets up search box with enhanced debounced filtering
+         */
+        function setupSearchBox() {
+            const searchBox = document.getElementById('searchBox');
+            const debouncedFilter = debounce(filterProducts, 200);
+            
+            searchBox.addEventListener('input', (e) => {
+                debouncedFilter();
+                
+                // Show search status
+                if (e.target.value.length > 0) {
+                    console.log(`🔍 Searching for: "${e.target.value}"`);
+                }
+            });
+            
+            searchBox.addEventListener('focus', () => {
+                searchBox.style.transform = 'scale(1.02)';
+            });
+            
+            searchBox.addEventListener('blur', () => {
+                searchBox.style.transform = 'scale(1)';
+            });
+        }
+
+        /**
+         * Sets up category filter buttons with enhanced UX
+         */
+        function setupCategoryFilters() {
+            const filterBtns = document.querySelectorAll('.filter-btn');
+            
+            filterBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // Remove active class from all buttons
+                    filterBtns.forEach(b => b.classList.remove('active'));
+                    
+                    // Add active class to clicked button
+                    e.target.classList.add('active');
+                    
+                    // Update active filter
+                    const newFilter = e.target.dataset.filter;
+                    activeFilter = newFilter;
+                    
+                    // Filter products
+                    filterProducts();
+                    
+                    // Show filter message
+                    const filterNames = {
+                        'all': 'All Items',
+                        'professional_binder': 'Professional Binders',
+                        'pair': 'Complete Chemical Pairs',
+                        'customer_binder': 'Customer Binder Files'
+                    };
+                    
+                    showMessage(`Filtered to: ${filterNames[newFilter] || newFilter}`, 'success');
+                    
+                    console.log(`📂 Filter changed to: ${newFilter}`);
+                });
+            });
+        }
+
+        /**
+         * Populates the product list in sidebar with enhanced styling
+         */
+        function populateProductList() {
+            const productList = document.getElementById('productList');
+            productList.innerHTML = '';
+
+            if (filteredProducts.length === 0) {
+                productList.innerHTML = '<div style="text-align: center; padding: 20px; color: var(--dark-gray);">No items match your search criteria</div>';
+                return;
+            }
+
+            filteredProducts.forEach((product, index) => {
+                const productItem = document.createElement('div');
+                productItem.className = `product-item ${product.category}`;
+                productItem.addEventListener('click', (e) => selectProduct(product, e));
+
+                // Determine status info
+                const statusInfo = [];
+                if (product.sds) statusInfo.push('SDS');
+                if (product.literature) statusInfo.push('Literature');
+                if (product.isProfessionalBinder) statusInfo.push('PROFESSIONAL');
+
+                // Determine category label with enhanced icons
+                const categoryLabel = product.isProfessionalBinder ? '🏆 PROFESSIONAL' :
+                                   product.category === 'pair' ? '✅ COMPLETE' :
+                                   product.category === 'customer_binder' ? '📁 BINDER' : '⚠️ SINGLE';
+
+                productItem.innerHTML = `
+                    <div class="product-name">${product.name}</div>
+                    <div class="product-status">
+                        <span>📄 ${statusInfo.join(' • ')}</span>
+                        <span style="font-size: 0.75rem; font-weight: 600;">${categoryLabel}</span>
+                    </div>
+                `;
+
+                productList.appendChild(productItem);
+            });
+            
+            console.log(`📋 Populated product list with ${filteredProducts.length} items`);
+        }
+
+        /**
+         * Handles product selection from sidebar with enhanced UX
+         */
+        function selectProduct(product, e) {
+            currentProduct = product;
+            
+            // Remove active class from all product items
+            document.querySelectorAll('.product-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Add active class to selected item
+            e.currentTarget.classList.add('active');
+            
+            // Update main content area
+            updateMainContent(product);
+            
+            // Log selection
+            console.log(`📍 Selected: ${product.name}`);
+            
+            // Show selection message
+            showMessage(`Selected: ${product.name}`, 'success');
+        }
+
+        /**
+         * Updates main content area with enhanced product details
+         */
+        function updateMainContent(product) {
+            document.getElementById('documentTitle').textContent = product.name;
+            const contentArea = document.getElementById('contentArea');
+
+            if (product.isEmergency) {
+                // Emergency information view
+                contentArea.innerHTML = `
+                    <div style="padding: 30px;">
+                        <h2 style="color: var(--danger-color); margin-bottom: 20px;">🚨 Emergency Response Information</h2>
+                        
+                        <div style="background: #fff3cd; border: 1px solid #ffeaa7; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                            <h4 style="color: #856404; margin-bottom: 15px;">24/7 Emergency Contacts</h4>
+                            <p><strong>Emergency Services:</strong> 911</p>
+                            <p><strong>Poison Control:</strong> 1-800-222-1222</p>
+                            <p><strong>RascoWeb, Inc. Technical Support:</strong> Available through professional portal</p>
+                        </div>
+                        
+                        <div style="background: #f8d7da; border: 1px solid #f5c6cb; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                            <h4 style="color: #721c24; margin-bottom: 15px;">Emergency Procedures</h4>
+                            <p>1. <strong>Immediate Safety:</strong> Remove person from danger, provide fresh air</p>
+                            <p>2. <strong>Medical Attention:</strong> Call 911 for serious exposures</p>
+                            <p>3. <strong>SDS Reference:</strong> Locate specific chemical SDS for detailed emergency information</p>
+                            <p>4. <strong>Professional Support:</strong> Contact technical support for guidance</p>
+                        </div>
+                        
+                        <div style="background: #d1ecf1; border: 1px solid #bee5eb; padding: 20px; border-radius: 10px;">
+                            <h4 style="color: #0c5460; margin-bottom: 15px;">Quick SDS Access</h4>
+                            <p>Use the search function to quickly locate Safety Data Sheets for any chemical.</p>
+                            <p>All SDS documents contain specific emergency response procedures for each chemical.</p>
+                            <button onclick="focusSearch()" class="btn" style="margin-top: 15px;">🔍 Search Chemical Database</button>
+                        </div>
+                    </div>
+                `;
+            } else if (product.isStatDetail) {
+                // Statistics detail view
+                contentArea.innerHTML = `
+                    <div style="padding: 30px; text-align: center;">
+                        <h2 style="color: var(--primary-color); margin-bottom: 20px;">${product.name}</h2>
+                        <p style="font-size: 1.1rem; margin-bottom: 30px;">${product.description}</p>
+                        
+                        <div style="background: linear-gradient(145deg, #f8f9fa, #e9ecef); padding: 30px; border-radius: 15px; margin: 30px 0;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 15px;">System Overview</h4>
+                            <p>Professional documentation system providing complete compliance and safety management.</p>
+                            <p>Regular updates ensure continued regulatory compliance and system optimization.</p>
+                        </div>
+                        
+                        <button onclick="focusSearch()" class="btn" style="margin: 10px;">🔍 Explore Database</button>
+                        <button onclick="openProfessionalBinder('sds')" class="btn btn-gold" style="margin: 10px;">📋 View SDS Binder</button>
+                    </div>
+                `;
+            } else if (product.isProfessionalBinder) {
+                // Professional binder view with enhanced details
+                contentArea.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <h2 style="color: var(--binder-color); margin-bottom: 20px;">🏆 Professional Binder</h2>
+                        <h3 style="margin-bottom: 20px;">${product.name}</h3>
+                        <p style="font-size: 1.1rem; margin-bottom: 30px;">${product.description}</p>
+                        
+                        <div style="background: linear-gradient(145deg, #f8f9fa, #e9ecef); padding: 30px; border-radius: 15px; margin: 30px 0;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 15px;">Professional Features</h4>
+                            ${product.binderType === 'sds' ? `
+                                <p>✅ Complete SDS compilation with 13 safety data sheets</p>
+                                <p>✅ Professional formatting with table of contents and indexing</p>
+                                <p>✅ Print-ready quality for physical binders and emergency access</p>
+                                <p>✅ Digital accessibility through professional portal system</p>
+                                <p>✅ OSHA Hazard Communication Standard full compliance</p>
+                                <p>✅ Emergency response ready with quick reference guides</p>
+                            ` : `
+                                <p>✅ 8 comprehensive training sections covering all GHS requirements</p>
+                                <p>✅ Company-specific content tailored for Summit Maintenance Inc operations</p>
+                                <p>✅ Professional certification ready materials and assessments</p>
+                                <p>✅ OSHA Hazard Communication Standard training alignment</p>
+                                <p>✅ Chemical inventory management and emergency procedures</p>
+                                <p>✅ Regular compliance updates and regulatory change notifications</p>
+                            `}
+                        </div>
+                        
+                        <div style="margin: 30px 0;">
+                            <button onclick="openProfessionalBinder('${product.binderType}')" class="btn btn-gold" style="font-size: 1.1rem; padding: 15px 30px; margin: 10px;">
+                                🖨️ Open Professional Binder
+                            </button>
+                            <br>
+                            <button onclick="focusSearch()" class="btn" style="margin: 10px;">🔍 Search Related Items</button>
+                        </div>
+                        
+                        <div style="background: #e8f5e8; padding: 20px; border-radius: 10px; margin-top: 30px;">
+                            <p style="font-size: 0.9rem; color: var(--success-color); margin: 0;">
+                                <strong>Professional Quality Guarantee:</strong> This binder meets enterprise standards for safety documentation and regulatory compliance.
+                            </p>
+                        </div>
+                        
+                        <p style="margin-top: 20px; font-size: 0.9rem; color: var(--dark-gray);">
+                            Professional system by RascoWeb, Inc. • Full compliance documentation included • 24/7 technical support available
+                        </p>
+                    </div>
+                `;
+            } else {
+                // Enhanced chemical documentation view
+                contentArea.innerHTML = `
+                    <div style="padding: 30px;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 20px;">Chemical Documentation</h3>
+                        
+                        <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 25px;">
+                            <p><strong>Product:</strong> ${product.name}</p>
+                            <p><strong>Description:</strong> ${product.description}</p>
+                            <p><strong>Category:</strong> ${product.pairType} Document</p>
+                            <p><strong>Safety Information:</strong> ${product.hazards}</p>
+                        </div>
+                        
+                        <h4 style="color: var(--primary-color); margin-bottom: 15px;">Available Documents</h4>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 25px;">
+                            ${product.sds ? `
+                                <a href="${product.sds}" target="_blank" class="btn" style="margin: 5px 0;">
+                                    👁️ View Safety Data Sheet
+                                </a>
+                            ` : '<p style="color: var(--warning-color); font-style: italic;">⚠️ Safety Data Sheet not available</p>'}
+                            ${product.literature ? `
+                                <a href="${product.literature}" target="_blank" class="btn" style="margin: 5px 0;">
+                                    📋 View Product Literature
+                                </a>
+                            ` : '<p style="color: var(--warning-color); font-style: italic;">⚠️ Product Literature not available</p>'}
+                        </div>
+                        
+                        <div style="background: #e8f5e8; border: 1px solid #c3e6cb; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h4 style="color: var(--success-color); margin-bottom: 10px;">🚨 Emergency Information</h4>
+                            <p style="font-size: 0.9rem;">For emergency situations involving this chemical, reference the Safety Data Sheet immediately.</p>
+                            <p style="font-size: 0.9rem; margin-top: 10px;"><strong>Emergency Services:</strong> 911</p>
+                            <p style="font-size: 0.9rem;"><strong>Poison Control:</strong> 1-800-222-1222</p>
+                            <p style="font-size: 0.9rem;"><strong>Professional Support:</strong> RascoWeb, Inc. Technical Services</p>
+                        </div>
+                        
+                        <div style="background: #d1ecf1; border: 1px solid #bee5eb; padding: 20px; border-radius: 10px;">
+                            <h4 style="color: var(--accent-color); margin-bottom: 10px;">📋 Professional System Features</h4>
+                            <p style="font-size: 0.9rem;">✓ Complete documentation access and management</p>
+                            <p style="font-size: 0.9rem;">✓ Mobile-responsive design for field access</p>
+                            <p style="font-size: 0.9rem;">✓ Real-time search and filtering capabilities</p>
+                            <p style="font-size: 0.9rem;">✓ Professional emergency response integration</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * Filters products based on search term and active category with enhanced performance
+         */
+        function filterProducts() {
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase().trim();
+            
+            filteredProducts = products.filter(product => {
+                const matchesSearch = searchTerm === '' || 
+                    product.name.toLowerCase().includes(searchTerm) ||
+                    (product.description && product.description.toLowerCase().includes(searchTerm)) ||
+                    (product.pairType && product.pairType.toLowerCase().includes(searchTerm));
+                
+                const matchesCategory = activeFilter === 'all' || product.category === activeFilter;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            populateProductList();
+            
+            // Enhanced logging and user feedback
+            const searchInfo = searchTerm ? ` matching "${searchTerm}"` : '';
+            const categoryInfo = activeFilter !== 'all' ? ` in category "${activeFilter}"` : '';
+            
+            console.log(`🔍 Filtered: ${filteredProducts.length} products${searchInfo}${categoryInfo}`);
+            
+            // Update UI with filter results
+            if (filteredProducts.length === 0 && (searchTerm || activeFilter !== 'all')) {
+                showMessage('No items match your current filters', 'error');
+            }
+        }
+
+        // Initialize the application when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('📄 DOM loaded, initializing application...');
+            initializeApp();
+        });
+        
+        // Add loading message
+        console.log('🚀 Professional GHS Binder System v8.35-COMPLETE-RESTORE-FIXED loading...');
+        console.log('✅ Features: Git Data API deployment + Complete interactive functionality + All 5 targeted fixes');
+        console.log('🔧 Ready for bulletproof professional operation');
+    </script>
 </body>
 </html>
